@@ -1,0 +1,26 @@
+name: Validate WORKNIC STATION
+on:
+  push:
+    paths:
+      - "station/**"
+  pull_request:
+    paths:
+      - "station/**"
+jobs:
+  storefront:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: station/apps/storefront
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.0
+          cache: npm
+          cache-dependency-path: station/apps/storefront/package-lock.json
+      - run: npm install
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://worknic.company
+          NEXT_PUBLIC_MEDUSA_BACKEND_URL: http://localhost:9000
