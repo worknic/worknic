@@ -1,0 +1,3 @@
+import ProductCard from "@/components/ProductCard"
+import {products} from "@/lib/products"
+export default async function Page({searchParams}:{searchParams:Promise<{q?:string}>}){const {q=""}=await searchParams;const term=q.toLowerCase();const list=!term?products:products.filter(p=>`${p.brand} ${p.name} ${p.model} ${p.section}`.toLowerCase().includes(term));return <main className="section shell"><div className="eyebrow">SEARCH</div><h1>{q?`“${q}” 검색 결과`:"상품 검색"}</h1><p className="sub">모델명·브랜드·상품명으로 찾을 수 있습니다. TOOL MAP 작업어 검색은 상품 관계 데이터 연결 후 확장합니다.</p><div className="products">{list.map(p=><ProductCard key={p.slug} p={p}/>)}</div></main>}
