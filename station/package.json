@@ -1,0 +1,18 @@
+{
+  "name": "worknic-station",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/backend",
+    "apps/storefront"
+  ],
+  "scripts": {
+    "dev:backend": "npm --workspace @worknic/station-backend run dev",
+    "dev:storefront": "npm --workspace @worknic/station-storefront run dev",
+    "build:backend": "npm --workspace @worknic/station-backend run build",
+    "build:storefront": "npm --workspace @worknic/station-storefront run build"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}
