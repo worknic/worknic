@@ -1,28 +1,60 @@
 # WORKNIC STATION
 
-WORKNIC STATION의 실제 운영형 커머스 프로젝트입니다.
+WORKNIC STATION의 실제 운영형 커머스 개발 베이스입니다.
 
-- 고객 화면: Next.js 15
-- 커머스 백엔드/관리자: Medusa 2
-- 데이터베이스: PostgreSQL
-- 운영 도메인: https://worknic.company
-- 1차 지역: 경기도 · 포천 / 경기도 · 구리
-- 핵심 탐색: REFILL / TOOLS / SELECT / PROJECT
+- Storefront: Next.js 15
+- Commerce backend/Admin: Medusa 2.20.1
+- Database: PostgreSQL
+- Target domain: https://worknic.company
+- Initial regions: 경기도 · 포천 / 경기도 · 구리
+- Navigation: REFILL / TOOLS / SELECT / PROJECT
 
-## 원칙
+## 현재 구현
 
-1. 디자인은 교체 가능하지만 상품·주문·픽업 구조는 유지합니다.
-2. 고객에게는 지역을 과장하지 않고 실제 운영 상태만 표시합니다.
-3. 상품은 POS 전체를 바로 공개하지 않고 선별 상품부터 Published 합니다.
-4. Medusa 관리자에서 상품/가격/재고/주문을 관리하고 Next.js가 고객 화면을 담당합니다.
+`apps/storefront`
+- WORKNIC 모바일 우선 shell/navigation
+- 홈
+- REFILL / TOOLS / SELECT
+- PROJECT task navigation
+- 검색
+- 상품 상세
+- STATION network
+- 장바구니 연결 지점
+- 검증된 시작 상품 fixture
 
-## 앱 구조
+`apps/backend`
+- Medusa 2 backend package
+- production CORS/config skeleton
+- environment template
 
-- `apps/backend`: Medusa 백엔드 + Admin
-- `apps/storefront`: WORKNIC 고객용 Next.js
+`data`
+- 검증된 opening product master CSV
 
-## 배포 방향
+`docs`
+- WORKNIC product identity + STATION/ROUTE data model
+- 상품등록 운영 기준
+- worknic.company 배포/go-live checklist
 
-- `worknic.company`: Storefront
-- Medusa backend/admin: 별도 서비스 URL로 배포 후 storefront에서 API 연결
-- 운영 전 PG/Npay/Kakao/Toss 실결제와 구리 실제 수령지를 별도 승인합니다.
+## 운영 원칙
+
+1. 디자인은 교체 가능하지만 상품·주문·픽업 구조는 유지한다.
+2. 고객에게는 실제 운영 상태만 표시한다.
+3. POS 전체를 바로 공개하지 않고 identity가 검증된 상품부터 Published 한다.
+4. Medusa Admin을 직원용 상품/가격/재고/주문 운영 화면으로 사용한다.
+5. Next.js는 고객이 보는 WORKNIC 경험을 담당한다.
+6. REFILL은 반복 소모와 규격 깊이, SELECT는 관계와 선택 이유를 중심으로 한다.
+7. PROJECT는 별도 재고가 아니라 SKU 간 작업 관계다.
+
+## 다음 연결 단계
+
+코드만으로 완료할 수 없는 항목은 외부 credentials가 필요합니다.
+
+- PostgreSQL 운영 DB 생성 + migration
+- Medusa Admin 사용자/Publishable key
+- 실제 Inventory Location
+- 배포 서비스 프로젝트와 환경변수
+- worknic.company DNS
+- PG merchant 테스트/라이브 credentials
+- 구리 실제 수령지/운영시간
+
+세부 절차: `docs/DEPLOYMENT.md`
