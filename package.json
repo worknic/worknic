@@ -1,0 +1,9 @@
+{
+  "name": "worknic-store-tools",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^2.4.3"
+  }
+}
