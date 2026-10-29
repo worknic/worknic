@@ -1,6 +1,9 @@
 import { naverCommerce } from "../../lib/naver-commerce.js";
+import { requireAdmin } from "../../lib/admin-auth.js";
 
 export default async function handler(req, res) {
+  if (!requireAdmin(req, res)) return;
+
   const originProductNo = req.query?.originProductNo;
   if (!originProductNo) {
     return res.status(400).json({ error: "originProductNo is required" });
