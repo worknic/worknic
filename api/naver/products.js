@@ -2,7 +2,7 @@ import { requireAdmin } from "../../lib/admin-auth.js";
 
 function relayConfig() {
   const url = process.env.WORKNIC_NAVER_RELAY_URL;
-  const token = process.env.WORKNIC_RELAY_TOKEN;
+  const token = process.env.WORKNIC_RELAY_TOKEN || process.env.WORKNIC_ADMIN_TOKEN;
   if (!url || !token) throw new Error("WORKNIC relay is not configured");
   return { url: url.replace(/\/$/, ""), token };
 }
